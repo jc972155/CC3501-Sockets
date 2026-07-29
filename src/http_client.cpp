@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
     char *user = curl_easy_escape(curl, username, username.length());
     char *messgae = curl_easy_escape(curl, message, message.length());
 
-    std::string url = "https://api.thingspeak.com/update?api_keys=ZKE95ZURWV7DW8B0&field1=" + std::string(username) + "&fields2=" + std::string(message)
+    std::string url = "http://api.thingspeak.com/update?api_keys=ZKE95ZURWV7DW8B0&field1=" + std::string(username) + "&fields2=" + std::string(message)
 
     curl_free(username);
     curl_free(message)
