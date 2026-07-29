@@ -1,6 +1,7 @@
 #include <curl/curl.h>
 #include <stdio.h>
 #include <fcntl.h>
+#include <string>
 
 // To call we use ./http_client google.com
 
