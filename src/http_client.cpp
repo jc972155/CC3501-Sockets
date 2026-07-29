@@ -75,6 +75,7 @@ int main(int argc, char *argv[])
 
     // Configure the URL to load
     curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+    curl_easy_cleanup(curl);
 
     // Send the HTTP request
     CURLcode res = curl_easy_perform(curl);
