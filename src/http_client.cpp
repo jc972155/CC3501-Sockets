@@ -48,9 +48,12 @@ int main(int argc, char *argv[])
     // The first argument (argv[0]) is always the name of the program.
     if (argc < 2) {
         printf("Usage:\n");
-        printf("%s URL    Fetch the specified HTTP URL\n", argv[0]);
+        printf("%s Username and Message\n", argv[0]);
         return 1;
     }
+
+    std::string username = argv[1];
+    std::string message = argv[2];
 
     // Initialise the HTTP library
     CURL *curl = curl_easy_init();
@@ -59,11 +62,19 @@ int main(int argc, char *argv[])
         return 1;
     }
 
+    char *user = curl_easy_escape(curl, username, username.length());
+    char *messgae = curl_easy_escape(curl, message, message.length());
+
+    std::string url = "https://api.thingspeak.com/update?api_keys=ZKE95ZURWV7DW8B0&field1=" + std::string(username) + "&fields2=" + std::string(message)
+
+    curl_free(username);
+    curl_free(message)
+
     // Set the callback function that will receive the actual data
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, http_callback);
 
     // Configure the URL to load
-    curl_easy_setopt(curl, CURLOPT_URL, argv[1]);
+    curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
 
     // Send the HTTP request
     CURLcode res = curl_easy_perform(curl);
