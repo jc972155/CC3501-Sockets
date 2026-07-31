@@ -53,6 +53,7 @@ int main(int argc, char *argv[])
         return 1;
     }
 
+    // Extract the username and message from the command-line arguments
     std::string username = argv[1];
     std::string message = argv[2];
 
@@ -63,9 +64,11 @@ int main(int argc, char *argv[])
         return 1;
     }
 
+    // Convert username and message to URL-encoded format
     char *user = curl_easy_escape(curl, username.c_str(), username.length());
     char *data = curl_easy_escape(curl, message.c_str(), message.length());
 
+    // Combine URL with api key and username and message
     std::string url = "http://api.thingspeak.com/update?api_key=ZKE95ZURWV7DW8B0&field1=" + std::string(user) + "&field2=" + std::string(data);
 
     curl_free(user);
